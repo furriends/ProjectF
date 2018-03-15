@@ -1,0 +1,22 @@
+{
+  "name": "projectf",
+  "version": "1.0.0",
+  "description": "CPSC 304 (database) project for SPCA usage or something ¯\\\\\\_(ツ)_/¯",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thealexhoar/projectf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thealexhoar/projectf/issues"
+  },
+  "homepage": "https://github.com/thealexhoar/projectf#readme",
+  "dependencies": {
+    "server": "^1.0.18"
+  }
+}
