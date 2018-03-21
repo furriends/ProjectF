@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/thealexhoar/projectf#readme",
   "dependencies": {
+    "mysql": "^2.15.0",
     "server": "^1.0.18"
   }
 }
