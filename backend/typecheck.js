@@ -11,8 +11,32 @@ function hasParams(object, params) {
 
 function checkParamType(param, value) {
     switch(param) {
+        case 'animalId':
+            checkId(param, value)
+            break
+        case 'applicationId':
+            checkId(param, value)
+            break
+        case 'birthdate':
+            checkBirthdate(value)
+            break
         case 'emailId':
-            checkEmailID(value)
+            checkGenericString(param, value)
+            break
+        case 'imgUrl':
+            checkGenericString(param, value)
+            break
+        case 'name':
+            checkGenericString(name, value)
+            break
+        case 'phone':
+            checkPhone(value)
+            break
+        case 'specialNeeds':
+            checkGenericString(param, value)
+            break
+        case 'staffId':
+            checkId(param, value)
             break
         case 'userType':
             checkUserType(value)
@@ -22,18 +46,51 @@ function checkParamType(param, value) {
     }
 }
 
-function checkEmailID(val) {
-    // I'm not going to be terribly strict about emails
+function checkBirthdate(val) {
+    //TODO: check birthdates
+}
+
+function checkGenericString(param, val) {
+    // I'm not going to be terribly strict about some strings
     // it's not worth the headache
     if (typeof(val) !== typeof('string')) {
-        throw Error(`Parameter checkEmailID must be a string!`)
+        throw Error(`Parameter ${param} must be a string!`)
+    }
+}
+
+function checkId(param, val) {
+    if (val.match(/^[0-9]+$/) === null) {
+        throw new Error(`Parameter ${param} must be a number!`)
+    }
+}
+
+function checkPhone(val) {
+    if (typeof(val) !== typeof('string')) {
+        throw Error(`Parameter phone must be a string!`)
+    }
+    if (val.length !== 10 || val.match(/^[0-9]+$/) === null) {
+        throw Error(`Parameter phone must be a 10-digit number!`)
+    }
+}
+
+function checkSex(val) {
+    if (val !== 'male' && val !== 'female') {
+        throw Error(`Parameter sex must have value "male" or "female"`)
     }
 }
 
 function checkUserType(val) {
-    //console.log(val)
     if (val !== 'applicant' && val !== 'staff') {
         throw Error(`Parameter userType must have value "applicant" or "staff"`)
+    }
+}
+
+function checkWeight(val) {
+    if (val.match(/^[0-9]+$/) === null) {
+        throw Error(`Parameter weight must be a number!`)
+    }
+    if (parseInt(val) <= 0 || parseInt(val) >= 250) {
+        throw Error(`Parameter weight must be reasonable (1-250)!`)
     }
 }
 
@@ -47,6 +104,13 @@ module.exports =
         }
         params.forEach(param => {
             checkParamType(param, object[param])
+        })
+    },
+    testParamsLazy: (object, params) => {
+        params.forEach(param => {
+            if (object[param]) {
+                checkParamType(param, object[param])
+            }
         })
     }
 }
