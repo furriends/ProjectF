@@ -3,7 +3,7 @@ const utils = require('./utils')
 var mysql = require('mysql')
 const server = require('server')
 const {get, post, error} = server.router
-const {status, send} = server.reply;
+const {header, send, status} = server.reply;
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -20,11 +20,18 @@ connection.connect(err => {
     }
 })
 
+const cors = [
+    ctx => header("Access-Control-Allow-Origin", "*"),
+    ctx => header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
+    ctx => ctx.method.toLowerCase() === 'options' ? 200 : false
+];
+
 server(
     {
         port: 8080,
         security: false
     }, 
+    cors,
     [
         post('/profile', getProfile),
         post('/application/getall', getAllApplications),
