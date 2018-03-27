@@ -6,12 +6,10 @@ DROP DATABASE if exists furriends;
 CREATE DATABASE furriends;
 USE furriends;
 
-/* Create user with all privileges (TODO: May need to edit) */
+/* Create user with all privileges */
 
 CREATE USER IF not exists 'user'@'localhost';
 GRANT ALL PRIVILEGES ON * TO 'user'@'localhost' IDENTIFIED BY 'password';
-
-
 
 /* Create tables */
 
@@ -43,7 +41,9 @@ img_url VARCHAR(190),
 species_id INT NOT NULL,
 location_id INT NOT NULL,
 PRIMARY KEY (animal_id),
-FOREIGN KEY (species_id) REFERENCES Species(species_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CHECK (sex = 'f' OR sex = 'm'),
+CHECK (weight > 0),
+FOREIGN KEY (species_id) REFERENCES Species(species_id) ON DELETE NO ACTION ON UPDATE CASCADE,
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE NO ACTION ON UPDATE CASCADE); 
 
 CREATE TABLE Applicant(
@@ -83,7 +83,7 @@ animal_id INT NOT NULL,
 applicant_id INT NOT NULL,
 staff_id INT NOT NULL,
 PRIMARY KEY (application_id),
-FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE NO ACTION ON UPDATE CASCADE,
+FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (applicant_id) REFERENCES Applicant(applicant_id) ON DELETE NO ACTION ON UPDATE CASCADE,
 FOREIGN KEY (staff_id) REFERENCES Staff(staff_id) ON DELETE NO ACTION ON UPDATE CASCADE); 
 
