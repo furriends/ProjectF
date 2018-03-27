@@ -318,7 +318,7 @@ function updateAnimal(context) {
                         fulfill(status(200).send(output))
                     }
                     else {
-                        reject({status: 400, val: ''})
+                        reject({status: 400, val: `Animal with animal_id=${animalId} not found!`})
                     }
                 }
             })
