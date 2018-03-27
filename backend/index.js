@@ -228,6 +228,15 @@ function getAllAnimals(context) {
     })
 }
 
+function queryAnimals(context) {
+    console.log('queryAnimals')
+    typecheck.testParams(context.body, ['query'])
+
+    query = context.body['query']
+
+
+}
+
 function deleteAnimal(context) {
     console.log('deleteAnimal')
     typecheck.testParams(context.body, ['animalId'])
@@ -267,7 +276,7 @@ function updateAnimal(context) {
                     fulfill(results[0])
                 }
                 else {
-                    reject({status: 400, val: ''})
+                    reject({status: 400, val: `Animal with animal_id=${animalId} not found!`})
                 }
             }
         })
