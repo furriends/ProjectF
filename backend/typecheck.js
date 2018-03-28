@@ -32,6 +32,9 @@ function checkParamType(param, value) {
         case 'phone':
             checkPhone(value)
             break
+        case 'query':
+            checkGenericString(param, val)
+            break
         case 'specialNeeds':
             checkGenericString(param, value)
             break
@@ -73,8 +76,14 @@ function checkPhone(val) {
     }
 }
 
+function checkQuery(val) {
+    if (val !== 'min' && val !== 'max' && val !== 'avg') {
+        throw Error(`Parameter query must be "min", "max", or "avg"`)
+    }
+}
+
 function checkSex(val) {
-    if (val !== 'male' && val !== 'female') {
+    if (val !== 'm' && val !== 'f') {
         throw Error(`Parameter sex must have value "male" or "female"`)
     }
 }
@@ -98,6 +107,7 @@ function checkWeight(val) {
 
 module.exports = 
 {
+    hasAllParams: hasParams,
     testParams: (object, params) => {
         if (!hasParams(object, params)) {
             throw Error(`The body does not have all parameters: ${params}`)

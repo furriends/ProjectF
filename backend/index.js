@@ -1,5 +1,6 @@
 const typecheck = require('./typecheck')
 const utils = require('./utils')
+const refresh = require('./furriends')
 var mysql = require('mysql')
 const server = require('server')
 const {get, post, error} = server.router
@@ -15,10 +16,11 @@ var connection = mysql.createConnection({
 
 connection.connect(err => {
     if (err) {
-        console.error('Coult not connect to mysql')
+        console.error('Could not connect to mysql')
         console.error(err.stack)
     }
 })
+
 
 const cors = [
     ctx => header("Access-Control-Allow-Origin", "*"),
@@ -33,18 +35,29 @@ server(
     }, 
     cors,
     [
+        //post('/reseed', refreshTables),
         post('/profile', getProfile),
         post('/application/getall', getAllApplications),
         post('/application/oversee', getAllOverseenApplications),
         post('/application/applicant', getAllApplicantApplications),
         post('/application/getone', getSingleApplication),
+        post('/application/query', queryApplication),
         post('/animal/getone', getAnimal),
         post('/animal/getall', getAllAnimals),
         post('/animal/delete', deleteAnimal),
+        post('/animal/querydelete', queryDeleteAnimal),
         post('/animal/update', updateAnimal),
+        post('/animal/query', queryAnimals),
+        post('/animal/popularity', queryAnimalPopularity),
+        post('/locations/allbreeds', queryLocationBreeds),
+        post(context => status(404)),
         error(context => status(500).send(context.error.message))
     ]
 );
+
+function refreshTables(context) {
+    //TODO ?
+}
 
 function getProfile(context) {
     console.log('getProfile...')
@@ -175,9 +188,14 @@ function getSingleApplication(context) {
             return status(200).send(output)
         }
         else {
-            return status(400)
+            return status(400).send(`No application with id ${applicationId} exists`)
         }
     })
+}
+
+function queryApplication(context) {
+    console.log('queryApplication')
+    //TODO: determine what "input" means
 }
  
 function getAnimal(context) {
@@ -185,6 +203,7 @@ function getAnimal(context) {
     typecheck.testParams(context.body, ['animalId'])
 
     //TODO: check if the key animalId should be used
+    // I think it is ok
     animalId = context.body['animalId']
 
     queryString = `SELECT img_url, birthdate, animal_id, sex, weight, Animal.name, special_needs, intake_date, fee FROM Animal INNER JOIN Species ON Animal.species_id=Species.species_id WHERE animal_id=${animalId}`
@@ -204,7 +223,7 @@ function getAnimal(context) {
             return status(200).send(output)
         }
         else {
-            return status(400)
+            return status(400).send(`No animal with id ${animalId} exists`)
         }
     })
 }
@@ -236,9 +255,28 @@ function queryAnimals(context) {
 
     query = context.body['query']
 
+    queryString = `SELECT img_url, birthdate, sex, weight, name, special_needs, intake_date FROM Animal WHERE species_id IN (SELECT DISTINCT species_id FROM Species WHERE fee=${query}(fee))`
+
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
+        console.log('queryAnimals successful')
+        output = results.map(utils.renameAnimalFields)
+        return status(200).send(output)
+    })
+}
+
+function queryAnimalPopularity(context) {
     //TODO: implement
+}
 
-
+function queryLocationBreeds(context) {
+    //TODO: implement
 }
 
 function deleteAnimal(context) {
@@ -257,9 +295,14 @@ function deleteAnimal(context) {
         })
     }).then((results) => {
         console.log('deleteAnimal successful')
+        console.log(results)
         //TODO: learn how to handle success
-        return status(500)
+        return status(200)
     })
+}
+
+function queryDeleteAnimal(context) {
+    //TODO: implement
 }
 
 function updateAnimal(context) {
@@ -287,15 +330,16 @@ function updateAnimal(context) {
     }).then((res) => {
         return new Promise((fulfill, reject) => {
             originalAnimal = utils.renameAnimalFields(res)
-            
-            //TODO: fix dates getting broken af
 
             imgUrl = context.body['imgUrl'] ? context.body['imgUrl'] : originalAnimal.imgUrl
-            birthdate = context.body['birthdate'] ? context.body['birthdate'] : originalAnimal.birthdate
+            //birthdate = context.body['birthdate'] ? context.body['birthdate'] : originalAnimal.birthdate
+            //dirty fix for dates being broken af
+            birthdate = originalAnimal.birthdate
             weight = context.body['weight'] ? context.body['weight'] : originalAnimal.weight
             animalName = context.body['name'] ? context.body['name'] : originalAnimal.name
             specialNeeds = context.body['specialNeeds'] ? context.body['specialNeeds'] : originalAnimal.specialNeeds
-            intakeDate = context.body['intakeDate'] ? context.body['intakeDate'] : originalAnimal.intakeDate
+            //intakeDate = context.body['intakeDate'] ? context.body['intakeDate'] : originalAnimal.intakeDate
+            intakeDate = originalAnimal.intakeDate
             sex = context.body['sex'] ? context.body['sex'] : originalAnimal.sex
 
             queryString = `UPDATE Animal SET img_url="${imgUrl}", birthdate="${birthdate}", weight=${weight}, name="${animalName}", special_needs="${specialNeeds}", intake_date="${intakeDate}", sex="${sex}" WHERE animal_id=${animalId}`
