@@ -42,7 +42,7 @@ species_id INT NOT NULL,
 location_id INT NOT NULL,
 PRIMARY KEY (animal_id),
 CHECK (sex = 'f' OR sex = 'm'),
-CHECK (weight > 0),
+CHECK (weight > 0 AND weight < 300),
 FOREIGN KEY (species_id) REFERENCES Species(species_id) ON DELETE NO ACTION ON UPDATE CASCADE,
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE NO ACTION ON UPDATE CASCADE); 
 
@@ -53,7 +53,7 @@ name VARCHAR(190),
 phone VARCHAR(190),
 location_id INT NOT NULL,
 PRIMARY KEY (applicant_id),
-UNIQUE (name, phone),
+UNIQUE (phone),
 UNIQUE (email),
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE NO ACTION ON UPDATE CASCADE); 
 
@@ -70,7 +70,7 @@ name VARCHAR(190),
 phone VARCHAR(190),
 location_id INT NOT NULL,
 PRIMARY KEY (staff_id),
-UNIQUE (name, phone),
+UNIQUE (phone),
 FOREIGN KEY (location_id) REFERENCES Branch(location_id) ON DELETE NO ACTION ON UPDATE CASCADE);
 
 CREATE TABLE Application(
@@ -130,7 +130,7 @@ VALUES ('2010-01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ib
 INSERT INTO Applicant(email, name, phone, location_id)
 VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
 ('jamielu@gmail.com', 'Jamie Lu', '7783541937', 8),
-('kilanno4@gmail.com', 'Kilan No', '6043762457', 9),
+('kilanno4@gmail.com', 'Kilan No', '6043792457', 9),
 ('crazycatlady@yahoo.com', 'Linda Smith', '7783216373', 10),
 ('jaketrey@yahoo.com', 'Jake Trey', '5024738872', 6),
 ('slothlover@yahoo.com', 'Lisa Lu', '7788324564', 8),
