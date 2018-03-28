@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     port: '3306',
     user: 'root', //LEARN WTF TO PUT HERE
-    password: '', //CONFIG FILES ARE FOR THE WEAK+
+    password: 'Fuel4Rocket', //CONFIG FILES ARE FOR THE WEAK+
     database: 'furriends'
 })
 
@@ -32,7 +32,7 @@ server(
     {
         port: 8080,
         security: false,
-        ssl : { key: './domain.key', key: './domain.cert' }
+        //security: {csrf: false}
     }, 
     cors,
     [
