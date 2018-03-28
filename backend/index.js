@@ -31,7 +31,8 @@ const cors = [
 server(
     {
         port: 8080,
-        security: false
+        security: false,
+        ssl : { key: './domain.key', key: './domain.cert' }
     }, 
     cors,
     [
