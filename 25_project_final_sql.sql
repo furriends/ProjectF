@@ -54,7 +54,6 @@ phone VARCHAR(190),
 location_id INT NOT NULL,
 PRIMARY KEY (applicant_id),
 UNIQUE (phone),
-UNIQUE (email),
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE NO ACTION ON UPDATE CASCADE); 
 
 CREATE TABLE Branch(
