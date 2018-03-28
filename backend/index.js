@@ -47,7 +47,7 @@ server(
 );
 
 function getProfile(context) {
-    console.log('getProfile')
+    console.log('getProfile...')
     typecheck.testParams(context.body, ['phone', 'userType'])
     
     phone = context.body['phone']
@@ -69,7 +69,7 @@ function getProfile(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
+        console.log('getProfile successful')
         if (results.length > 0) {
             results[0]['userType'] = userType
             return status(200).send(results[0])
@@ -81,7 +81,7 @@ function getProfile(context) {
 }
 
 function getAllApplications(context) {
-    console.log('getAllApplications')
+    console.log('getAllApplications...')
 
     queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application`
     
@@ -93,20 +93,19 @@ function getAllApplications(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
+        console.log('getAllApplications successful')
         output = results.map(utils.renameApplicationFields)
         return status(200).send(output)
     })
 }
 
 function getAllOverseenApplications(context) {
-    console.log('getAllOverseenApplications')
-    typecheck.testParams(context.body, ['staffId'])
+    console.log('getAllOverseenApplications...')
+    typecheck.testParams(context.body, ['phone'])
     
-    //TODO: switch tousing phone number
-    staffId = context.body['staffId']
+    phone = context.body['phone']
 
-    queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application WHERE staff_id=${staffId}`
+    queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application INNER JOIN Staff ON Application.staff_id=Staff.staff_id WHERE phone="${phone}"`
     
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
@@ -116,21 +115,25 @@ function getAllOverseenApplications(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
-        output = results.map(utils.renameApplicationFields)
-        return status(200).send(output)
+        if (results.length > 0) {
+            console.log('getAllOverseenApplications successful')
+            output = results.map(utils.renameApplicationFields)
+            return status(200).send(output)
+        }
+        else {
+            return status(400).send(`No application exists for overseer with phone number "${phone}"`)
+        }
     })
 }
 
 function getAllApplicantApplications(context) {
-    console.log('getAllApplicantApplications')
-    typecheck.testParams(context.body, ['applicantId'])
+    console.log('getAllApplicantApplications...')
+    typecheck.testParams(context.body, ['phone'])
 
-    // TODO: use applicant phone instead of ID 
     
-    applicantId = context.body['applicantId']
+    applicantId = context.body['phone']
 
-    queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application WHERE applicant_id=${applicantId}`
+    queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application INNER JOIN Applicant ON Application.applicant_id=Applicant.applicant_id WHERE phone="${phone}"`
     
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
@@ -140,14 +143,19 @@ function getAllApplicantApplications(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
-        output = results.map(utils.renameApplicationFields)
-        return status(200).send(output)
+        if (results.length > 0) {
+            console.log('getAllApplicantApplications successful')
+            output = results.map(utils.renameApplicationFields)
+            return status(200).send(output)
+        }
+        else {
+            return status(400).send(`No application exists for applicant with phone number "${phone}"`)
+        }
     })
 }
 
 function getSingleApplication(context) {
-    console.log('getSingleApplication')
+    console.log('getSingleApplication...')
     typecheck.testParams(context.body, ['applicationId'])
 
     applicationId = context.body['applicationId']
@@ -161,7 +169,7 @@ function getSingleApplication(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
+        console.log('getSingleApplication successful')
         if (results.length > 0) {
             output = utils.renameApplicationFields(results[0])
             return status(200).send(output)
@@ -173,7 +181,7 @@ function getSingleApplication(context) {
 }
  
 function getAnimal(context) {
-    console.log('getAnimal')
+    console.log('getAnimal...')
     typecheck.testParams(context.body, ['animalId'])
 
     //TODO: check if the key animalId should be used
@@ -190,7 +198,7 @@ function getAnimal(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
+        console.log('getAnimal successful')
         if (results.length > 0) {
             output = utils.renameAnimalFields(results[0])
             return status(200).send(output)
@@ -202,7 +210,7 @@ function getAnimal(context) {
 }
 
 function getAllAnimals(context) {
-    console.log('getAllAnimals')
+    console.log('getAllAnimals...')
 
 
     queryString = `SELECT img_url, birthdate, animal_id, sex, weight, Animal.name, special_needs, intake_date, fee FROM Animal INNER JOIN Species ON Animal.species_id=Species.species_id`
@@ -216,14 +224,14 @@ function getAllAnimals(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
+        console.log('getAllAnimals successful')
         output = results.map(utils.renameAnimalFields)
         return status(200).send(output)
     })
 }
 
 function queryAnimals(context) {
-    console.log('queryAnimals')
+    console.log('queryAnimals...')
     typecheck.testParams(context.body, ['query'])
 
     query = context.body['query']
@@ -248,14 +256,14 @@ function deleteAnimal(context) {
             fulfill(results)
         })
     }).then((results) => {
-        console.log(results)
+        console.log('deleteAnimal successful')
         //TODO: learn how to handle success
         return status(500)
     })
 }
 
 function updateAnimal(context) {
-    console.log('updateAnimal')
+    console.log('updateAnimal...')
     typecheck.testParamsLazy(context.body, ['animalId', 'imgUrl', 'birthdate', 'weight', 'animalName', 'specialNeeds', 'intakeDate', 'sex'])
 
     animalId = context.body['animalId']
@@ -303,7 +311,7 @@ function updateAnimal(context) {
         })
     }).then((res) => {
         return new Promise((fulfill, reject) => {
-            console.log(res)
+            console.log('updateAnimal successful')
             connection.query(primaryQueryString, (error, results, fields) => {
                 if (error) {
                     reject({status: 500, val: error})
