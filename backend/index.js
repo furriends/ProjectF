@@ -145,7 +145,7 @@ function getAllApplicantApplications(context) {
     typecheck.testParams(context.body, ['phone'])
 
     
-    applicantId = context.body['phone']
+    phone = context.body['phone']
 
     queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application INNER JOIN Applicant ON Application.applicant_id=Applicant.applicant_id WHERE phone="${phone}"`
     
