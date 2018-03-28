@@ -38,7 +38,6 @@ server(
         post('/application/oversee', getAllOverseenApplications),
         post('/application/applicant', getAllApplicantApplications),
         post('/application/getone', getSingleApplication),
-        post('/application/delete', deleteApplication),
         post('/animal/getone', getAnimal),
         post('/animal/getall', getAllAnimals),
         post('/animal/delete', deleteAnimal),
@@ -76,7 +75,7 @@ function getProfile(context) {
             return status(200).send(results[0])
         }
         else {
-            return status(400)
+            return status(400).send(`User of type "${userType}" with phone number "${phone}" not found!`)
         }
     })
 }
@@ -104,6 +103,7 @@ function getAllOverseenApplications(context) {
     console.log('getAllOverseenApplications')
     typecheck.testParams(context.body, ['staffId'])
     
+    //TODO: switch tousing phone number
     staffId = context.body['staffId']
 
     queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application WHERE staff_id=${staffId}`
@@ -125,6 +125,8 @@ function getAllOverseenApplications(context) {
 function getAllApplicantApplications(context) {
     console.log('getAllApplicantApplications')
     typecheck.testParams(context.body, ['applicantId'])
+
+    // TODO: use applicant phone instead of ID 
     
     applicantId = context.body['applicantId']
 
@@ -169,20 +171,12 @@ function getSingleApplication(context) {
         }
     })
 }
-
-function deleteApplication(context) {
-    console.log('deleteApplication')
-    typecheck.testParams(context.body, ['animalId'])
-    
-    //TODO: clarify request params
-
-    return status(500)
-}
  
 function getAnimal(context) {
     console.log('getAnimal')
     typecheck.testParams(context.body, ['animalId'])
 
+    //TODO: check if the key animalId should be used
     animalId = context.body['animalId']
 
     queryString = `SELECT img_url, birthdate, animal_id, sex, weight, Animal.name, special_needs, intake_date, fee FROM Animal INNER JOIN Species ON Animal.species_id=Species.species_id WHERE animal_id=${animalId}`
@@ -233,6 +227,8 @@ function queryAnimals(context) {
     typecheck.testParams(context.body, ['query'])
 
     query = context.body['query']
+
+    //TODO: implement
 
 
 }
@@ -329,3 +325,4 @@ function updateAnimal(context) {
 }
 
 
+//TODO: advanced queries
