@@ -27,12 +27,15 @@ function checkParamType(param, value) {
             checkGenericString(param, value)
             break
         case 'name':
-            checkGenericString(name, value)
+            checkGenericString(param, value)
             break
         case 'phone':
             checkPhone(value)
             break
         case 'query':
+            checkGenericString(param, val)
+            break
+        case 'sex':
             checkGenericString(param, val)
             break
         case 'specialNeeds':
@@ -79,12 +82,6 @@ function checkPhone(val) {
 function checkQuery(val) {
     if (val !== 'min' && val !== 'max' && val !== 'avg') {
         throw Error(`Parameter query must be "min", "max", or "avg"`)
-    }
-}
-
-function checkSex(val) {
-    if (val !== 'm' && val !== 'f') {
-        throw Error(`Parameter sex must have value "male" or "female"`)
     }
 }
 

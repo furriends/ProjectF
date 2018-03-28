@@ -125,7 +125,7 @@ VALUES ('2010-01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ib
 ('2015-12-03', 'm', '2018-03-23', 'none', 7, 'Erik', 'https://image.ibb.co/gtz3fS/12.jpg', 2, 3),
 ('2017-08-05', 'f', '2018-01-14', 'none', 10, 'Loafy', 'https://image.ibb.co/hADJEn/13.jpg', 1, 4),
 ('2018-01-22', 'm', '2017-12-27', 'none', 9, 'Furball', 'https://image.ibb.co/eBuVS7/14.jpg', 1, 3),
-('2018-3-14', 'm', '2018-03-25', 'none', 1, 'Hammy', 'https://image.ibb.co/d4ALS7/15.jpg', 6, 2);
+('2018-3-14', 'm', '2018-03-25', 'none', 1, 'Hammy', 'https://image.ibb.co/d4ALS7/15.jpg', 6, 3);
 
 INSERT INTO Applicant(email, name, phone, location_id)
 VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),

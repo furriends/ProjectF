@@ -272,11 +272,49 @@ function queryAnimals(context) {
 }
 
 function queryAnimalPopularity(context) {
-    //TODO: implement
+    console.log('queryAnimalPopularity')
+
+    //TODO: figure this out like wtf even
+    queryString1 = `SELECT name, breed, MAX(B.avgApplication) FROM Species natural join (
+        SELECT species_id, AVG(A.numApplication) as avgApplication FROM Animal natural join (
+        SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected" GROUP BY animal_id) AS A
+        group by species_id) as B;`
+
+    queryString2 = `SELECT name, breed, MIN(B.avgApplication) FROM Species natural join (
+        SELECT species_id, AVG(A.numApplication) as avgApplication FROM Animal natural join (
+        SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected" GROUP BY animal_id) AS A
+        group by species_id) as B;`
+
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString1, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
+        console.log('queryAnimalPopularity successful')
+        console.log(results)
+        return status(200).send(results)
+    })
 }
 
 function queryLocationBreeds(context) {
-    //TODO: implement
+    console.log('queryLocationBreeds...')
+    queryString = `SELECT name, address, city FROM Branch NATURAL JOIN Location AS B WHERE NOT EXISTS (SELECT DISTINCT species_id FROM Species WHERE species_id NOT IN (SELECT DISTINCT species_id FROM Animal WHERE Animal.location_id=B.location_id))`
+
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
+        console.log('queryLocationBreeds successful')
+        return status(200).send(results)
+    })
+
 }
 
 function deleteAnimal(context) {
@@ -295,14 +333,32 @@ function deleteAnimal(context) {
         })
     }).then((results) => {
         console.log('deleteAnimal successful')
-        console.log(results)
-        //TODO: learn how to handle success
         return status(200)
     })
 }
 
 function queryDeleteAnimal(context) {
-    //TODO: implement
+    console.log('queryDeleteAnimal')
+    typecheck.testParams(context.body, ['name'])
+
+    name = context.body['name']
+    queryString = `DELETE FROM Animal WHERE name="${name}"`
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
+        console.log('queryDeleteAnimal successful')
+        if (results.affectedRows == 0) {
+            return status(400).send(`QueryDelete found no animals with name "${name}"`)
+        }
+        else {
+            return status(200)
+        }
+    })
 }
 
 function updateAnimal(context) {
@@ -375,6 +431,3 @@ function updateAnimal(context) {
         return status(err.status).send(err.val.toString()) 
     })
 }
-
-
-//TODO: advanced queries
