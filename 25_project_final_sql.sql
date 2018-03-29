@@ -60,6 +60,7 @@ CREATE TABLE Branch(
 branch_id INT AUTO_INCREMENT,
 name VARCHAR(190),
 services VARCHAR(190),
+location_id INT NOT NULL,
 PRIMARY KEY (branch_id),
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE CASCADE ON UPDATE CASCADE);
 
