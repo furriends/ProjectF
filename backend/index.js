@@ -51,7 +51,7 @@ server(
         post('/animal/query', queryAnimals),
         post('/animal/popularity', queryAnimalPopularity),
         post('/locations/allbreeds', queryLocationBreeds),
-        post('locations/query', queryCity),
+        post('/locations/query', queryCity),
         post(context => status(404)),
         error(context => status(500).send(context.error.message))
     ]
