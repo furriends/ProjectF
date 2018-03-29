@@ -113,19 +113,20 @@ VALUES ('333 Main St', 'Vancouver'),
 INSERT INTO Animal(birthdate, sex, intake_date, special_needs, weight, name, img_url, species_id, location_id)
 VALUES ('2010-01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ibb.co/iRkC77/1.jpg', 2, 3),
 ('2014-07-22', 'f', '2018-02-10', 'diabetic', 8, 'Abbath', 'https://image.ibb.co/kua6Zn/2.jpg', 1, 2),
-('2015-02-11', 'm', '2017-12-20', 'overweight', 20, 'Big Boned', 'https://preview.ibb.co/mJ9B0S/3.jpg', 3, 6),
-('2016-05-04', 'm', '2018-01-10', 'none', 9, 'Pinky', 'https://image.ibb.co/dzh3En/4.jpg', 4, 1),
+('2015-02-11', 'm', '2017-12-20', 'overweight', 110, 'Big Boned', 'https://preview.ibb.co/mJ9B0S/3.jpg', 3, 6),
+('2016-05-04', 'm', '2018-01-10', 'none', 9, 'Pinky', 'https://image.ibb.co/dzh3En/4.jpg', 4, 2),
 ('2007-09-11', 'f', '2017-12-01', 'none', 4, 'Eeyore', 'https://image.ibb.co/ctMkS7/5.jpg', 5, 3),
-('2013-02-17', 'm', '2018-03-10', 'no kids', 9, 'Euronymous', 'https://image.ibb.co/bv6Kn7/6.jpg', 2, 4),
+('2013-02-17', 'm', '2018-03-10', 'no kids', 9, 'Euronymous', 'https://image.ibb.co/bv6Kn7/6.jpg', 2, 2),
 ('2014-08-01', 'm', '2016-01-01', 'none', 9, 'Sloth', 'https://image.ibb.co/cQ9YEn/7.jpg', 1, 3),
 ('2016-09-11', 'f', '2017-11-11', 'no cats', 10, 'Sticky', 'https://image.ibb.co/hNqUn7/8.jpg', 3, 3),
 ('2010-06-06', 'm', '2017-12-24', 'none', 8, 'Teacup', 'https://preview.ibb.co/kbxELS/9.jpg', 4, 3),
-('2006-06-06', 'm', '2017-12-13', 'none', 6, 'Ebony', 'https://image.ibb.co/fvYAun/10.jpg', 5, 1),
+('2006-06-06', 'm', '2017-12-13', 'none', 6, 'Ebony', 'https://image.ibb.co/fvYAun/10.jpg', 5, 2),
 ('2016-09-15', 'm', '2018-03-24', 'none', 8, 'Fenriz', 'https://image.ibb.co/hqwifS/11.jpg', 2, 2),
 ('2015-12-03', 'm', '2018-03-23', 'none', 7, 'Erik', 'https://image.ibb.co/gtz3fS/12.jpg', 2, 3),
 ('2017-08-05', 'f', '2018-01-14', 'none', 10, 'Loafy', 'https://image.ibb.co/hADJEn/13.jpg', 1, 4),
 ('2018-01-22', 'm', '2017-12-27', 'none', 9, 'Furball', 'https://image.ibb.co/eBuVS7/14.jpg', 1, 3),
-('2018-3-14', 'm', '2018-03-25', 'none', 1, 'Hammy', 'https://image.ibb.co/d4ALS7/15.jpg', 6, 3);
+('2018-3-14', 'm', '2018-03-25', 'none', 1, 'Hammy', 'https://image.ibb.co/d4ALS7/15.jpg', 6, 3),
+('2014-2-10', 'm', '2018-03-29', 'none', 25, 'Choco', 'https://image.ibb.co/nwVZC7/16.jpg', 3, 2);
 
 INSERT INTO Applicant(email, name, phone, location_id)
 VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
@@ -138,11 +139,11 @@ VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
 ('elliejno4@gmail.com', 'Ellie No', '6043762457', 9);
 
 INSERT INTO Branch(name, services, location_id)
-VALUES ('Vancouver Furriends Central', 'adoption, information',1),
-('North Shore Education Centre', 'information',2),
-('Richmond Education and Adoption Centre', 'adoption, information',3),
-('Furriends Office', 'information, administration',4),
-('Nelson Adoption Centre', 'adoption, information',5);
+VALUES ('Vancouver Furriends Central', 'adoption, information', 1),
+('North Shore Education Centre', 'information', 2),
+('Richmond Education and Adoption Centre', 'adoption, information', 3),
+('Furriends Office', 'information, administration', 4),
+('Nelson Adoption Centre', 'adoption, information', 5);
 
 INSERT INTO Staff(name, phone, branch_id)
 VALUES ('John Smith', '7783764326', 3),
