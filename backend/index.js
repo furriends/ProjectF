@@ -292,7 +292,7 @@ function queryAnimals(context) {
 
     query = context.body['query']
 
-    //TODO: brian fix
+    //TODO: BRIAN
     queryString = `SELECT img_url, birthdate, sex, weight, name, special_needs, intake_date FROM Animal WHERE species_id IN (SELECT DISTINCT species_id FROM Species WHERE fee=${query}(fee))`
 
     return new Promise( (fulfill, reject) => {
@@ -312,7 +312,7 @@ function queryAnimals(context) {
 function queryAnimalPopularity(context) {
     console.log('queryAnimalPopularity')
 
-    //TODO: figure this out like wtf even
+    //TODO: BRIAN
     queryString1 = `SELECT name, breed, MAX(B.avgApplication) FROM Species natural join (
         SELECT species_id, AVG(A.numApplication) as avgApplication FROM Animal natural join (
         SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected" GROUP BY animal_id) AS A
