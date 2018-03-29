@@ -197,6 +197,42 @@ function getSingleApplication(context) {
 function queryApplication(context) {
     console.log('queryApplication')
     //TODO: determine what "input" means
+    typecheck.testParams(context.body, ['columns', 'type', 'input'])
+
+    columns = context.body['columns']
+    type = context.body['type']
+    input = context.body['input']
+
+    columnString = columns.reduce( (accumulator, val) => {
+        if (accumulator === '') {
+            return val
+        }
+        else {
+            return `${accumulator}, ${val}`
+        }
+    })
+
+    equalityString = type === 'application-id' ? `application_id=${input}` : `animal_id=${input}`
+
+    queryString = `SELECT ${columnString} FROM Application WHERE ${equalityString}`
+
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
+        if (results.length > 0) {
+            console.log('queryApplication successful')
+            output = results.map(utils.renameApplicationFields)
+            return status(200).send(output)
+        }
+        else {
+            return status(400).send(`No Applications found!`)
+        }
+    })
 }
  
 function getAnimal(context) {
@@ -256,6 +292,7 @@ function queryAnimals(context) {
 
     query = context.body['query']
 
+    //TODO: brian fix
     queryString = `SELECT img_url, birthdate, sex, weight, name, special_needs, intake_date FROM Animal WHERE species_id IN (SELECT DISTINCT species_id FROM Species WHERE fee=${query}(fee))`
 
     return new Promise( (fulfill, reject) => {

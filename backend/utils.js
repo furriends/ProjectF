@@ -1,13 +1,24 @@
 module.exports = {
     renameApplicationFields: (application) => {
-        return {
+        out = {
             applicationId: application.application_id,
-            typeOfHome: application.home_type,
-            yearlyBudget: application.budget,
-            otherPets: application.pets,
-            applicationStatus: application.status,
             animalId: application.animal_id
         }
+
+        if (application.home_type) {
+            out.typeOfHome = application.home_type
+        }
+        if(application.budget) {
+            out.yearlyBudget = application.budget
+        }
+        if(application.pets) {
+            out.otherPets = application.pets
+        }
+        if(application.status) {
+            out.applicationStatus = application.status
+        }
+
+        return out
     },
 
     renameAnimalFields: (animal) => {

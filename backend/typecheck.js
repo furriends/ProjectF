@@ -20,11 +20,17 @@ function checkParamType(param, value) {
         case 'birthdate':
             checkBirthdate(value)
             break
+        case 'columns':
+            checkColumns(value)
+            break
         case 'emailId':
             checkGenericString(param, value)
             break
         case 'imgUrl':
             checkGenericString(param, value)
+            break
+        case 'input':
+            checkId(param, value)
             break
         case 'name':
             checkGenericString(param, value)
@@ -47,6 +53,12 @@ function checkParamType(param, value) {
         case 'userType':
             checkUserType(value)
             break
+        case 'type':
+            checkType(value)
+            break
+        case 'weight':
+            checkId(param, value)
+            break
         default:
             throw Error(`Internal error: Parameter ${param} is unknown!`)
     }
@@ -54,6 +66,15 @@ function checkParamType(param, value) {
 
 function checkBirthdate(val) {
     //TODO: check birthdates
+}
+
+function checkColumns(val) {
+    if (typeof(val) !== typeof([])) {
+        throw Error(`Columns is incorrect type!`)
+    }
+    else if (val.length === 0) {
+        throw Error(`Columns cannot be empty!`)
+    }
 }
 
 function checkGenericString(param, val) {
@@ -82,6 +103,12 @@ function checkPhone(val) {
 function checkQuery(val) {
     if (val !== 'min' && val !== 'max' && val !== 'avg') {
         throw Error(`Parameter query must be "min", "max", or "avg"`)
+    }
+}
+
+function checkType(val) {
+    if(val !== 'animal-id' && val !== 'applicant-id') {
+        throw Error(`Parameter type myst be "animal-id" or "application-id"`)
     }
 }
 
