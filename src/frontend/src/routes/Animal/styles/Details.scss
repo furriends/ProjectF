@@ -1,0 +1,32 @@
+.DetailsWrapper {
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .AnimalDetailsInner {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    cursor: pointer;
+    .image {
+
+      height: 300px;
+      width: 500px;
+
+      border-radius: 5px;
+    }
+
+    .map {
+      height: 400px;
+      width: 400px;
+      position: relative;
+    }
+
+  }
+
+}

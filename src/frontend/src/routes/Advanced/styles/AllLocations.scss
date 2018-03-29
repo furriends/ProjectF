@@ -1,0 +1,38 @@
+.LocationsWithAllAnimalsWrapper {
+
+  border-bottom: 1px solid #393939;
+
+  .LocationsWithAllAnimalsInner {
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 2rem;
+
+    .LocationsWithAllAnimalsButton {
+      background-color: #393939;
+      height: 80px;
+      width: 280px;
+      border-radius: 5px;
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+    }
+
+    .ListOfLocations {
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      margin: 2rem;
+
+    }
+
+  }
+
+}

@@ -1,0 +1,81 @@
+
+
+.AboutWrapper {
+
+  height: 100vh;
+  width: 60%;
+
+  background-color: #66d9d3;
+
+  .AboutInner {
+    color: white;
+
+    margin: 3rem;
+
+    .description {
+      color: white;
+    }
+
+    .title {
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+
+      border-bottom: 1px solid #f26c4f;
+    }
+
+    .item {
+
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+
+    }
+
+    .euthenization-timer {
+
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 24px;
+
+      margin-top: 4rem;
+
+      .euth-title {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        border: none;
+      }
+      .countdown {
+        color: red;
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .deleteButton {
+      width: 200px;
+      height: 50px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2rem;
+
+      color: white;
+
+      background-color: #f26c4f;
+      border-radius: 5px;
+
+      cursor: pointer;
+
+    }
+
+
+  }
+
+}

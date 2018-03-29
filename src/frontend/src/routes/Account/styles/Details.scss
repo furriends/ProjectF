@@ -1,0 +1,34 @@
+.DetailsWrapper {
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .DetailsInner {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    color: #393939;
+    font-size: 36px;
+
+    .image {
+
+      height: 300px;
+      width: 500px;
+
+      border-radius: 5px;
+    }
+
+    .map {
+      height: 400px;
+      width: 400px;
+      position: relative;
+    }
+
+  }
+
+}

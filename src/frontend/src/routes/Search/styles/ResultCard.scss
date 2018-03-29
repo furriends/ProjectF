@@ -1,0 +1,51 @@
+.ResultCardWrapper {
+
+  .ResultCardInner {
+
+    width: 250px;
+    height: 300px;
+
+    background-color: #f26c4f;
+
+    border-radius: 5px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+
+    margin-top: 3rem;
+
+    cursor: pointer;
+
+    .image {
+      height: 150px;
+      width: 100%;
+      border-radius: 5px;
+
+
+    }
+
+    .content {
+      margin: 1rem;
+
+      .title {
+        display: flex;
+        justify-content: center;
+        color: white;
+        border-bottom: 1px solid #66d9d3;
+      }
+
+      .breed {
+        font-size: 12px;
+        margin-top: 1rem;
+        color: white;
+      }
+
+      .location {
+        font-size: 12px;
+        margin-top: 0.5rem;
+        color: white;
+      }
+
+    }
+  }
+}

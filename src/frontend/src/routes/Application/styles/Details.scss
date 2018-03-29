@@ -1,0 +1,50 @@
+.ApplicationDetailsWrapper {
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .ApplicationDetailsInner {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .image {
+
+      height: 300px;
+      width: 500px;
+
+      border-radius: 5px;
+    }
+
+    .map {
+      height: 400px;
+      width: 400px;
+      position: relative;
+    }
+
+    .detailsButtonApplication {
+
+      text-size: auto;
+
+      cursor: pointer;
+
+      height: 100px;
+      width: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: white;
+      background-color: #f26c4f;
+      border-radius: 5px;
+
+
+    }
+
+  }
+
+}

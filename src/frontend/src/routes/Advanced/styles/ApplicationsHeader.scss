@@ -1,0 +1,49 @@
+.ApplicationsHeaderWrapper {
+
+  display: flex;
+  flex-direction: row;
+
+  .leftSide {
+    width: 60%;
+    background-color: #66d9d3;
+    height: 100px;
+
+    color: white;
+
+    display: flex;
+    padding-left: 2rem;
+    align-items: center;
+
+    font-size: 24px;
+
+    text-decoration: #f26c4f;
+  }
+
+
+  .rightSide {
+    height: 100px;
+    width: 100%;
+
+    background-color: #f26c4f;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .viewApplicationsButton {
+      height: 50px;
+      width: 200px;
+      background-color: white;
+      color: #393939;
+      border-radius: 5px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+    }
+
+  }
+
+}

@@ -1,0 +1,57 @@
+.LocationsInCityWrapper {
+
+  border-bottom: 1px solid #393939;
+
+  .LocationsInCityInner {
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 2rem;
+
+    .LocationInputWrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      height: 80px;
+
+      .LocationInputButton {
+
+        background-color: #393939;
+        height: 80px;
+        width: 200px;
+        border-radius: 5px;
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        cursor: pointer;
+
+      }
+
+      .LocationInput {
+        margin-left: 2rem;
+        height: 2rem;
+        border-color: #393939;
+        border-radius: 5px;
+      }
+    }
+
+    .ListOfLocations {
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      margin: 2rem;
+
+    }
+
+  }
+
+}

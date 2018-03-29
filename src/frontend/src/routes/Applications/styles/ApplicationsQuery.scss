@@ -1,0 +1,90 @@
+.QueryWrapper {
+
+  height: 100vh;
+  width: 40%;
+
+  overflow: scroll;
+
+  background-color: #66d9d3;
+
+  .queryInner {
+
+    margin: 2rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    .title {
+      font-size: 24px;
+      //margin: auto;
+      color: white;
+
+      border-bottom: 1px solid #f26c4f;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      margin-top: 1rem;
+      color: white;
+      text-align: center;
+    }
+
+    .queryField {
+
+      margin-top: 1rem;
+
+
+      .queryTitle {
+        color: white;
+        font-size: 16px;
+      }
+
+      .input {
+
+        -webkit-appearance: none !important;
+        border:none;
+
+        width: 100%;
+        background-color: white;
+        border-radius: 5px;
+
+      }
+
+      .input-radio {
+
+      }
+
+    }
+
+    .queryButton {
+
+      margin: auto;
+      margin-top: 2rem;
+
+      height: 50px;
+      width: 100px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 5px;
+
+      color: white;
+      background-color: #f26c4f;
+
+      cursor: pointer;
+
+      transition: height 0.5s, width 0.5s, margin-top 0.5s;
+
+      //&:hover {
+      //  height: 75px;
+      //  width: 125px;
+      //  margin-top: 2.5rem;
+      //}
+
+    }
+
+  }
+}

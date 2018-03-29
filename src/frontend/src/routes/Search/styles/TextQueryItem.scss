@@ -1,0 +1,43 @@
+.TextQueryItemWrapper {
+
+  .queryInner {
+
+    margin: 2rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    .title {
+      font-size: 24px;
+      //margin: auto;
+      color: white;
+
+      border-bottom: 1px solid #f26c4f;
+    }
+
+    .queryField {
+
+      margin-top: 1rem;
+
+      .queryTitle {
+        color: white;
+        font-size: 16px;
+      }
+
+      .input {
+
+        -webkit-appearance: none !important;
+        border: none;
+
+        width: 100%;
+        background-color: white;
+        border-radius: 5px;
+
+      }
+
+    }
+
+  }
+
+}

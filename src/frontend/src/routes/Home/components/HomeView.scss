@@ -1,0 +1,167 @@
+.duck {
+  display: block;
+  width: 120px;
+  margin: 1.5rem auto;
+}
+
+$blur: 4px;
+
+.background-hovered {
+  filter: blur(4px);
+}
+
+.HomeView {
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin: 3rem;
+
+
+
+  .imgSection {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 6rem);
+
+    width: 50%;
+
+    position: relative;
+
+
+    .topSquare {
+
+      position: absolute;
+
+      height: 500px;
+      width: 500px;
+
+      border: 1px solid #f26c4f;
+      color: #393939;
+      background-color: #f26c4f;
+
+      border-radius: 5px;
+
+    }
+
+    .image {
+
+      position: absolute;
+      height: 300px;
+      width: 300px;
+
+      border-radius:5px;
+
+    }
+
+
+    @keyframes mymove {
+      0% {left: 56%;  top: 50%; }
+      25% {left: 15%; top: 50%; }
+      50% {left: 15%;  top: 15%; }
+      75% {left: 56%;  top: 15%; }
+      100% {left: 56%; top: 50%; }
+    }
+
+    .bottomSquare {
+
+      position: absolute;
+
+      top: 50%;
+      left: 56%;
+
+      height: 300px;
+      width: 300px;
+
+      border: 1px solid #66d9d3;
+      color: #66d9d3;
+      background-color: #66d9d3;
+
+      border-radius:5px;
+
+      filter: opacity(0.9);
+
+    }
+
+    .bottomSquareLoading {
+      animation: mymove 5s infinite linear;
+    }
+
+
+  }
+
+  .contentSection {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    padding-left:4rem;
+
+    .title {
+
+      font-size: 36px;
+      top: 250px;
+      color: #393939;
+      margin-bottom: 2rem;
+      text-align: center;
+
+    }
+
+    input {
+
+      margin-bottom: 2rem;
+      width: calc(300px);
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+
+      padding-left: 0.5rem;
+
+      border-radius: 5px;
+      border: 1px solid #393939;
+
+    }
+
+    .getStartedButtonWrapper {
+
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      justify-content: center;
+
+      .getStartedButton {
+        height: 50px;
+        width: 150px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid #f26c4f;
+        color: #393939;
+
+        cursor: pointer;
+        margin-right: 1rem;
+
+        &:hover {
+
+          #background {
+            filter: blur(4px);
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
+}
+
