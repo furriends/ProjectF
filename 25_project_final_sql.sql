@@ -57,10 +57,10 @@ UNIQUE (phone),
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE NO ACTION ON UPDATE CASCADE); 
 
 CREATE TABLE Branch(
-location_id INT AUTO_INCREMENT,
+branch_id INT AUTO_INCREMENT,
 name VARCHAR(190),
 services VARCHAR(190),
-PRIMARY KEY (location_id),
+PRIMARY KEY (branch_id),
 FOREIGN KEY (location_id) REFERENCES Location(location_id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE Staff(
@@ -136,12 +136,12 @@ VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
 ('samwu96@yahoo.com', 'Sam Wu', '6043724432', 10),
 ('elliejno4@gmail.com', 'Ellie No', '6043762457', 9);
 
-INSERT INTO Branch(name, services)
-VALUES ('Vancouver Furr-iends Central', 'adoption, information'),
-('North Shore Education Centre', 'information'),
-('Richmond Education and Adoption Centre', 'adoption, information'),
-('Furr-iends Office', 'information, administration'),
-('Nelson Adoption Centre', 'adoption, information');
+INSERT INTO Branch(name, services, location_id)
+VALUES ('Vancouver Furr-iends Central', 'adoption, information',1),
+('North Shore Education Centre', 'information',2),
+('Richmond Education and Adoption Centre', 'adoption, information',3),
+('Furr-iends Office', 'information, administration',4),
+('Nelson Adoption Centre', 'adoption, information',5);
 
 INSERT INTO Staff(name, phone, location_id)
 VALUES ('John Smith', '7783764326', 3),
