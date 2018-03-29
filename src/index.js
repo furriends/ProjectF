@@ -1,6 +1,5 @@
 const typecheck = require('./typecheck')
 const utils = require('./utils')
-const refresh = require('./furriends')
 var mysql = require('mysql')
 const server = require('server')
 const {get, post, error} = server.router
