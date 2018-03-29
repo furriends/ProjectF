@@ -436,7 +436,7 @@ function updateAnimal(context) {
             intakeDate = originalAnimal.intakeDate
             sex = context.body['sex'] ? context.body['sex'] : originalAnimal.sex
 
-            queryString = `UPDATE Animal SET img_url="${imgUrl}", birthdate="${birthdate}", weight=${weight}, name="${animalName}", special_needs="${specialNeeds}", intake_date="${intakeDate}", sex="${sex}" WHERE animal_id=${animalId}`
+            queryString = `UPDATE Animal SET img_url="${imgUrl}", weight=${weight}, name="${animalName}", special_needs="${specialNeeds}", sex="${sex}" WHERE animal_id=${animalId}`
             
             connection.query(queryString, (error, results, fields) => {
                 if (error) {
