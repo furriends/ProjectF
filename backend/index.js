@@ -293,9 +293,8 @@ function queryAnimals(context) {
     typecheck.testParams(context.body, ['query'])
 
     query = context.body['query']
-
-    //TODO: BRIAN
-    queryString = `SELECT img_url, birthdate, sex, weight, name, special_needs, intake_date FROM Animal WHERE species_id IN (SELECT DISTINCT species_id FROM Species WHERE fee=${query}(fee))`
+    
+    queryString = `SELECT img_url, birthdate, sex, weight, name, special_needs, intake_date FROM Animal WHERE species_id IN (SELECT DISTINCT species_id FROM Species WHERE fee IN (SELECT ${query}(fee) from Species))`
 
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
