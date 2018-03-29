@@ -144,7 +144,7 @@ VALUES ('Vancouver Furr-iends Central', 'adoption, information',1),
 ('Furr-iends Office', 'information, administration',4),
 ('Nelson Adoption Centre', 'adoption, information',5);
 
-INSERT INTO Staff(name, phone, location_id)
+INSERT INTO Staff(name, phone, branch_id)
 VALUES ('John Smith', '7783764326', 3),
 ('Katy Li', '6047682776', 4),
 ('Mimi Lo', '7784875567', 1),
