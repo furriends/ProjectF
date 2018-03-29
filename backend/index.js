@@ -430,7 +430,7 @@ function updateAnimal(context) {
             //dirty fix for dates being broken af
             birthdate = originalAnimal.birthdate
             weight = context.body['weight'] ? context.body['weight'] : originalAnimal.weight
-            animalName = context.body['name'] ? context.body['name'] : originalAnimal.name
+            animalName = context.body['animalName'] ? context.body['animalName'] : originalAnimal.name
             specialNeeds = context.body['specialNeeds'] ? context.body['specialNeeds'] : originalAnimal.specialNeeds
             //intakeDate = context.body['intakeDate'] ? context.body['intakeDate'] : originalAnimal.intakeDate
             intakeDate = originalAnimal.intakeDate
