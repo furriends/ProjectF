@@ -137,7 +137,7 @@ VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
 ('samwu96@yahoo.com', 'Sam Wu', '6043724432', 10),
 ('elliejno4@gmail.com', 'Ellie No', '6043762457', 9);
 
-INSERT INTO Branch(name, services, branch_id)
+INSERT INTO Branch(name, services, location_id)
 VALUES ('Vancouver Furr-iends Central', 'adoption, information',1),
 ('North Shore Education Centre', 'information',2),
 ('Richmond Education and Adoption Centre', 'adoption, information',3),
