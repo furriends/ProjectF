@@ -70,7 +70,7 @@ phone VARCHAR(190),
 location_id INT NOT NULL,
 PRIMARY KEY (staff_id),
 UNIQUE (phone),
-FOREIGN KEY (location_id) REFERENCES Branch(location_id) ON DELETE NO ACTION ON UPDATE CASCADE);
+FOREIGN KEY (location_id) REFERENCES Branch(branch_id) ON DELETE NO ACTION ON UPDATE CASCADE);
 
 CREATE TABLE Application(
 application_id INT AUTO_INCREMENT,
