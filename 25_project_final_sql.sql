@@ -111,7 +111,8 @@ VALUES ('333 Main St', 'Vancouver'),
 ('4530 W 15th Ave', 'Vancouver');
 
 INSERT INTO Animal(birthdate, sex, intake_date, special_needs, weight, name, img_url, species_id, location_id)
-VALUES ('2010-01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ibb.co/iRkC77/1.jpg', 2, 3),
+VALUES ('2010
+	01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ibb.co/iRkC77/1.jpg', 2, 3),
 ('2014-07-22', 'f', '2018-02-10', 'diabetic', 8, 'Abbath', 'https://image.ibb.co/kua6Zn/2.jpg', 1, 2),
 ('2015-02-11', 'm', '2017-12-20', 'overweight', 20, 'Big Boned', 'https://preview.ibb.co/mJ9B0S/3.jpg', 3, 6),
 ('2016-05-04', 'm', '2018-01-10', 'none', 9, 'Pinky', 'https://image.ibb.co/dzh3En/4.jpg', 4, 1),
@@ -138,10 +139,10 @@ VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
 ('elliejno4@gmail.com', 'Ellie No', '6043762457', 9);
 
 INSERT INTO Branch(name, services, location_id)
-VALUES ('Vancouver Furr-iends Central', 'adoption, information',1),
+VALUES ('Vancouver Furriends Central', 'adoption, information',1),
 ('North Shore Education Centre', 'information',2),
 ('Richmond Education and Adoption Centre', 'adoption, information',3),
-('Furr-iends Office', 'information, administration',4),
+('Furriends Office', 'information, administration',4),
 ('Nelson Adoption Centre', 'adoption, information',5);
 
 INSERT INTO Staff(name, phone, branch_id)
