@@ -51,6 +51,7 @@ server(
         post('/animal/query', queryAnimals),
         post('/animal/popularity', queryAnimalPopularity),
         post('/locations/allbreeds', queryLocationBreeds),
+        post('locations/query', queryCity),
         post(context => status(404)),
         error(context => status(500).send(context.error.message))
     ]
@@ -469,3 +470,30 @@ function updateAnimal(context) {
         return status(err.status).send(err.val.toString()) 
     })
 }
+
+function queryCity(context) {
+    console.log("queryCity...") 
+
+    cityName = context.body['cityName']
+
+    queryString = `select * from Location where city="${cityName}"`
+
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
+        console.log('queryCity successful')
+        if (results.length > 0) {
+            return status(200).send(results)
+        }
+        else {
+            return status(400).send(`No locations found for city ${cityName}`)
+        }
+    })
+}
+
+
