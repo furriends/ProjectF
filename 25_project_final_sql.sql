@@ -67,10 +67,10 @@ CREATE TABLE Staff(
 staff_id INT AUTO_INCREMENT,
 name VARCHAR(190),
 phone VARCHAR(190),
-location_id INT NOT NULL,
+branch_id INT NOT NULL,
 PRIMARY KEY (staff_id),
 UNIQUE (phone),
-FOREIGN KEY (location_id) REFERENCES Branch(branch_id) ON DELETE NO ACTION ON UPDATE CASCADE);
+FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE NO ACTION ON UPDATE CASCADE);
 
 CREATE TABLE Application(
 application_id INT AUTO_INCREMENT,
@@ -136,7 +136,7 @@ VALUES ('timmylin11@hotmail.com', 'Timmy Lin', '7783553887', 7),
 ('samwu96@yahoo.com', 'Sam Wu', '6043724432', 10),
 ('elliejno4@gmail.com', 'Ellie No', '6043762457', 9);
 
-INSERT INTO Branch(name, services, location_id)
+INSERT INTO Branch(name, services, branch_id)
 VALUES ('Vancouver Furr-iends Central', 'adoption, information',1),
 ('North Shore Education Centre', 'information',2),
 ('Richmond Education and Adoption Centre', 'adoption, information',3),
