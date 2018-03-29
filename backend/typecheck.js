@@ -89,6 +89,9 @@ function checkGenericString(param, val) {
 }
 
 function checkId(param, val) {
+    if (val === null) {
+        throw new Error(`Parameter ${param} has been supplied as null!`)
+    }
     val = val.toString()
     if (val.match(/^[0-9]+$/) === null) {
         throw new Error(`Parameter ${param} must be a number!`)
@@ -123,6 +126,9 @@ function checkUserType(val) {
 }
 
 function checkWeight(val) {
+    if (val === null) {
+        throw new Error(`Parameter weight has been supplied as null!`)
+    }
     val = val.toString()
     if (val.match(/^[0-9]+$/) === null) {
         throw Error(`Parameter weight must be a number!`)
