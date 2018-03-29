@@ -14,6 +14,9 @@ function checkParamType(param, value) {
         case 'animalId':
             checkId(param, value)
             break
+        case 'animalName':
+            checkGenericString(param, value)
+            break
         case 'applicationId':
             checkId(param, value)
             break
