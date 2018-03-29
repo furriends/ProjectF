@@ -49,7 +49,8 @@ server(
         post('/animal/querydelete', queryDeleteAnimal),
         post('/animal/update', updateAnimal),
         post('/animal/query', queryAnimals),
-        post('/animal/popularity', queryAnimalPopularity),
+        post('/animal/popular', queryAnimalPopular),
+        post('/animal/unpopular', queryAnimalUnpopular),
         post('/locations/allbreeds', queryLocationBreeds),
         post('/locations/query', queryCity),
         post(context => status(404)),
@@ -310,15 +311,13 @@ function queryAnimals(context) {
     })
 }
 
-function queryAnimalPopularity(context) {
+function queryAnimalPopular(context) {
     console.log('queryAnimalPopularity')
     
-    queryString1 = `SELECT name, breed, avgApplication FROM Averages WHERE avgApplication = (SELECT MAX(avgApplication) FROM Averages);`
-
-    queryString2 = `SELECT name, breed, avgApplication FROM Averages WHERE avgApplication = (SELECT MIN(avgApplication) FROM Averages);`
+    queryString = `SELECT name, breed, avgApplication FROM Averages WHERE avgApplication = (SELECT MAX(avgApplication) FROM Averages);`
 
     return new Promise( (fulfill, reject) => {
-        connection.query(queryString1, (error, results, fields) => {
+        connection.query(queryString, (error, results, fields) => {
             if (error) {
                 reject(error)
             }
@@ -329,6 +328,25 @@ function queryAnimalPopularity(context) {
         console.log(results)
         return status(200).send(results)
     })
+}
+
+function queryAnimalUnpopular(context) {
+    console.log('queryAnimalPopularity')
+
+    queryString = `SELECT name, breed, avgApplication FROM Averages WHERE avgApplication = (SELECT MIN(avgApplication) FROM Averages);`
+
+    return new Promise( (fulfill, reject) => {
+        connection.query(queryString, (error, results, fields) => {
+        if (error) {
+            reject(error)
+        }
+        fulfill(results)
+    })
+}).then((results) => {
+        console.log('queryAnimalPopularity successful')
+    console.log(results)
+    return status(200).send(results)
+})
 }
 
 function queryLocationBreeds(context) {
