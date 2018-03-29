@@ -111,8 +111,7 @@ VALUES ('333 Main St', 'Vancouver'),
 ('4530 W 15th Ave', 'Vancouver');
 
 INSERT INTO Animal(birthdate, sex, intake_date, special_needs, weight, name, img_url, species_id, location_id)
-VALUES ('2010
-	01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ibb.co/iRkC77/1.jpg', 2, 3),
+VALUES ('2010-01-14', 'm', '2018-01-09', 'none', 11, 'Fluffy', 'https://image.ibb.co/iRkC77/1.jpg', 2, 3),
 ('2014-07-22', 'f', '2018-02-10', 'diabetic', 8, 'Abbath', 'https://image.ibb.co/kua6Zn/2.jpg', 1, 2),
 ('2015-02-11', 'm', '2017-12-20', 'overweight', 20, 'Big Boned', 'https://preview.ibb.co/mJ9B0S/3.jpg', 3, 6),
 ('2016-05-04', 'm', '2018-01-10', 'none', 9, 'Pinky', 'https://image.ibb.co/dzh3En/4.jpg', 4, 1),
