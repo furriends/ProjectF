@@ -311,17 +311,10 @@ function queryAnimals(context) {
 
 function queryAnimalPopularity(context) {
     console.log('queryAnimalPopularity')
+    
+    queryString1 = `SELECT name, breed, avgApplication FROM Averages WHERE avgApplication = (SELECT MAX(avgApplication) FROM Averages);`
 
-    //TODO: BRIAN
-    queryString1 = `SELECT name, breed, MAX(B.avgApplication) FROM Species natural join (
-        SELECT species_id, AVG(A.numApplication) as avgApplication FROM Animal natural join (
-        SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected" GROUP BY animal_id) AS A
-        group by species_id) as B;`
-
-    queryString2 = `SELECT name, breed, MIN(B.avgApplication) FROM Species natural join (
-        SELECT species_id, AVG(A.numApplication) as avgApplication FROM Animal natural join (
-        SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected" GROUP BY animal_id) AS A
-        group by species_id) as B;`
+    queryString2 = `SELECT name, breed, avgApplication FROM Averages WHERE avgApplication = (SELECT MIN(avgApplication) FROM Averages);`
 
     return new Promise( (fulfill, reject) => {
         connection.query(queryString1, (error, results, fields) => {
