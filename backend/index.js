@@ -212,7 +212,7 @@ function queryApplication(context) {
         }
     })
 
-    equalityString = type === 'application-id' ? `application_id=${input}` : `animal_id=${input}`
+    equalityString = type === 'application_id' ? `application_id=${input}` : `animal_id=${input}`
 
     queryString = `SELECT ${columnString} FROM Application WHERE ${equalityString}`
 
