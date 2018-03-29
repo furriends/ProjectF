@@ -173,8 +173,10 @@ VALUES ('pending', 'none', 10000, 'apartment', 4, 3, 1),
 ('pending', 'none', 19000, 'town', 6, 8, 2),
 ('pending', 'none', 8000, 'farmhouse', 4, 2, 5);
 
-CREATE VIEW Averages(name, breed, avgApplication) AS SELECT name, breed, B.avgApplication as avgApplication FROM Species natural join (
+CREATE VIEW Averages(name, breed, avgApplication)
+AS SELECT name, breed, B.avgApplication as avgApplication FROM Species natural join (
 	SELECT species_id, AVG(A.numApplication) as avgApplication FROM Animal natural join (
-		SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected" GROUP BY animal_id
-	) AS A group by species_id 
+		SELECT animal_id, COUNT(animal_id) as numApplication FROM Application WHERE status!="rejected"
+		GROUP BY animal_id
+		) AS A group by species_id 
 ) as B;

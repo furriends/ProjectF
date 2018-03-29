@@ -9,8 +9,8 @@ const {header, send, status} = server.reply;
 var connection = mysql.createConnection({
     host: 'localhost',
     port: '3306',
-    user: 'root', //LEARN WTF TO PUT HERE
-    password: 'Fuel4Rocket', //CONFIG FILES ARE FOR THE WEAK+
+    user: 'root',
+    password: 'Fuel4Rocket',
     database: 'furriends'
 })
 
@@ -23,44 +23,38 @@ connection.connect(err => {
 
 
 const cors = [
-    ctx => header("Access-Control-Allow-Origin", "*"),
-    ctx => header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
-    ctx => ctx.method.toLowerCase() === 'options' ? 200 : false
+ctx => header("Access-Control-Allow-Origin", "*"),
+ctx => header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
+ctx => ctx.method.toLowerCase() === 'options' ? 200 : false
 ];
 
 server(
-    {
-        port: 8080,
-        security: false,
-        //security: {csrf: false}
-    }, 
-    cors,
-    [
-        //post('/reseed', refreshTables),
-        post('/profile', getProfile),
-        post('/application/getall', getAllApplications),
-        post('/application/oversee', getAllOverseenApplications),
-        post('/application/applicant', getAllApplicantApplications),
-        post('/application/getone', getSingleApplication),
-        post('/application/query', queryApplication),
-        post('/animal/getone', getAnimal),
-        post('/animal/getall', getAllAnimals),
-        post('/animal/delete', deleteAnimal),
-        post('/animal/querydelete', queryDeleteAnimal),
-        post('/animal/update', updateAnimal),
-        post('/animal/query', queryAnimals),
-        post('/animal/popular', queryAnimalPopular),
-        post('/animal/unpopular', queryAnimalUnpopular),
-        post('/locations/allbreeds', queryLocationBreeds),
-        post('/locations/query', queryCity),
-        post(context => status(404)),
-        error(context => status(500).send(context.error.message))
-    ]
+{
+    port: 8080,
+    security: false
+}, 
+cors,
+[
+post('/profile', getProfile),
+post('/application/getall', getAllApplications),
+post('/application/oversee', getAllOverseenApplications),
+post('/application/applicant', getAllApplicantApplications),
+post('/application/getone', getSingleApplication),
+post('/application/query', queryApplication),
+post('/animal/getone', getAnimal),
+post('/animal/getall', getAllAnimals),
+post('/animal/delete', deleteAnimal),
+post('/animal/querydelete', queryDeleteAnimal),
+post('/animal/update', updateAnimal),
+post('/animal/query', queryAnimals),
+post('/animal/popular', queryAnimalPopular),
+post('/animal/unpopular', queryAnimalUnpopular),
+post('/locations/allbreeds', queryLocationBreeds),
+post('/locations/query', queryCity),
+post(context => status(404)),
+error(context => status(500).send(context.error.message))
+]
 );
-
-function refreshTables(context) {
-    //TODO ?
-}
 
 function getProfile(context) {
     console.log('getProfile...')
@@ -91,7 +85,7 @@ function getProfile(context) {
             return status(200).send(results[0])
         }
         else {
-            return status(400).send(`User of type "${userType}" with phone number "${phone}" not found!`)
+            return status(400).send(`User of type "${userType}" with phone number "${phone}" not found`)
         }
     })
 }
@@ -137,7 +131,7 @@ function getAllOverseenApplications(context) {
             return status(200).send(output)
         }
         else {
-            return status(400).send(`No application exists for overseer with phone number "${phone}"`)
+            return status(400).send(`No applications exist for staff with phone number "${phone}"`)
         }
     })
 }
@@ -146,7 +140,6 @@ function getAllApplicantApplications(context) {
     console.log('getAllApplicantApplications...')
     typecheck.testParams(context.body, ['phone'])
 
-    
     phone = context.body['phone']
 
     queryString = `SELECT home_type, budget, pets, status, animal_id, application_id FROM Application INNER JOIN Applicant ON Application.applicant_id=Applicant.applicant_id WHERE phone="${phone}"`
@@ -165,7 +158,7 @@ function getAllApplicantApplications(context) {
             return status(200).send(output)
         }
         else {
-            return status(400).send(`No application exists for applicant with phone number "${phone}"`)
+            return status(400).send(`No applications exist for applicant with phone number "${phone}"`)
         }
     })
 }
@@ -198,7 +191,7 @@ function getSingleApplication(context) {
 
 function queryApplication(context) {
     console.log('queryApplication')
-    //TODO: determine what "input" means
+
     typecheck.testParams(context.body, ['columns', 'type', 'input'])
 
     columns = context.body['columns']
@@ -232,21 +225,18 @@ function queryApplication(context) {
             return status(200).send(output)
         }
         else {
-            return status(400).send(`No Applications found!`)
+            return status(400).send(`No applications found`)
         }
     })
 }
- 
+
 function getAnimal(context) {
     console.log('getAnimal...')
     typecheck.testParams(context.body, ['animalId'])
 
-    //TODO: check if the key animalId should be used
-    // I think it is ok
     animalId = context.body['animalId']
 
     queryString = `SELECT img_url, birthdate, animal_id, sex, weight, Animal.name, special_needs, intake_date, fee FROM Animal INNER JOIN Species ON Animal.species_id=Species.species_id WHERE animal_id=${animalId}`
-
     
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
@@ -270,9 +260,7 @@ function getAnimal(context) {
 function getAllAnimals(context) {
     console.log('getAllAnimals...')
 
-
     queryString = `SELECT img_url, birthdate, animal_id, sex, weight, Animal.name, special_needs, intake_date, fee FROM Animal INNER JOIN Species ON Animal.species_id=Species.species_id`
-
     
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
@@ -335,16 +323,16 @@ function queryAnimalUnpopular(context) {
 
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
-        if (error) {
-            reject(error)
-        }
-        fulfill(results)
-    })
-}).then((results) => {
+            if (error) {
+                reject(error)
+            }
+            fulfill(results)
+        })
+    }).then((results) => {
         console.log('queryAnimalPopularity successful')
-    console.log(results)
-    return status(200).send(results)
-})
+        console.log(results)
+        return status(200).send(results)
+    })
 }
 
 function queryLocationBreeds(context) {
@@ -401,7 +389,7 @@ function queryDeleteAnimal(context) {
     }).then((results) => {
         console.log('queryDeleteAnimal successful')
         if (results.affectedRows == 0) {
-            return status(400).send(`QueryDelete found no animals with name "${name}"`)
+            return status(400).send(`Found no animals with name "${name}" to delete`)
         }
         else {
             return status(200)
@@ -427,7 +415,7 @@ function updateAnimal(context) {
                     fulfill(results[0])
                 }
                 else {
-                    reject({status: 400, val: `Animal with animal_id=${animalId} not found!`})
+                    reject({status: 400, val: `Animal with animal_id=${animalId} not found`})
                 }
             }
         })
@@ -436,13 +424,10 @@ function updateAnimal(context) {
             originalAnimal = utils.renameAnimalFields(res)
 
             imgUrl = context.body['imgUrl'] ? context.body['imgUrl'] : originalAnimal.imgUrl
-            //birthdate = context.body['birthdate'] ? context.body['birthdate'] : originalAnimal.birthdate
-            //dirty fix for dates being broken af
             birthdate = originalAnimal.birthdate
             weight = context.body['weight'] ? context.body['weight'] : originalAnimal.weight
             animalName = context.body['animalName'] ? context.body['animalName'] : originalAnimal.name
             specialNeeds = context.body['specialNeeds'] ? context.body['specialNeeds'] : originalAnimal.specialNeeds
-            //intakeDate = context.body['intakeDate'] ? context.body['intakeDate'] : originalAnimal.intakeDate
             intakeDate = originalAnimal.intakeDate
             sex = context.body['sex'] ? context.body['sex'] : originalAnimal.sex
 
@@ -457,27 +442,27 @@ function updateAnimal(context) {
                 }
             })
         })
-    }).then((res) => {
-        return new Promise((fulfill, reject) => {
-            console.log('updateAnimal successful')
-            connection.query(primaryQueryString, (error, results, fields) => {
-                if (error) {
-                    reject({status: 500, val: error})
+}).then((res) => {
+    return new Promise((fulfill, reject) => {
+        console.log('updateAnimal successful')
+        connection.query(primaryQueryString, (error, results, fields) => {
+            if (error) {
+                reject({status: 500, val: error})
+            }
+            else {
+                if (results.length > 0) {
+                    output = utils.renameAnimalFields(results[0])
+                    fulfill(status(200).send(output))
                 }
                 else {
-                    if (results.length > 0) {
-                        output = utils.renameAnimalFields(results[0])
-                        fulfill(status(200).send(output))
-                    }
-                    else {
-                        reject({status: 400, val: `Animal with animal_id=${animalId} not found!`})
-                    }
+                    reject({status: 400, val: `Animal with animal_id=${animalId} not found`})
                 }
-            })
+            }
         })
-    }).catch((err) => {
-        return status(err.status).send(err.val.toString()) 
     })
+}).catch((err) => {
+    return status(err.status).send(err.val.toString()) 
+})
 }
 
 function queryCity(context) {
@@ -504,5 +489,3 @@ function queryCity(context) {
         }
     })
 }
-
-
