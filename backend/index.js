@@ -476,7 +476,7 @@ function queryCity(context) {
 
     cityName = context.body['cityName']
 
-    queryString = `select * from Location where city="${cityName}"`
+    queryString = `select * from Location inner join Branch on Location.location_id=Branch.location_id where city="${cityName}"`
 
     return new Promise( (fulfill, reject) => {
         connection.query(queryString, (error, results, fields) => {
