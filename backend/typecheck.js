@@ -107,8 +107,8 @@ function checkQuery(val) {
 }
 
 function checkType(val) {
-    if(val !== 'animal_id' && val !== 'applicant_id') {
-        throw Error(`Parameter type myst be "animal-id" or "application-id"`)
+    if(val !== 'animal_id' && val !== 'application_id') {
+        throw Error(`Parameter type myst be "animal_id" or "application_id"`)
     }
 }
 
